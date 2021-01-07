@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mh.msw.mapper.UserMapper">
+    <resultMap id="UserMap" type="com.mh.msw.model.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+    </resultMap>
+    <insert id="addUser" parameterType="com.mh.msw.model.User">
+        insert into user (user_name, name, password,status)
+        values (#{userName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getAllUsers"  resultMap="UserMap">
+    select * from user
+    </select>
+
+    <update id="updateUserByid" parameterType="com.mh.msw.model.User">
+        update user
+        set user_name = #{userName,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
