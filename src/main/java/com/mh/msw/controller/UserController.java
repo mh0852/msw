@@ -44,5 +44,6 @@ public class UserController {
         t1.setStatus("N");
         userService.updateUser(t1);
         return "修改用户"+t1.getId()+"信息";
+        //s
     }
 }
