@@ -33,6 +33,7 @@ public class UserController {
         userService.addUser(t1);
         return "增加用户"+t1.getName();
     }
+    //test
 
     @GetMapping("/updateUser")
     public String updateUser(){
@@ -40,7 +41,7 @@ public class UserController {
         t1.setId(2);
         t1.setName("张三");
         t1.setUserName("zhangsan");
-        t1.setPassword("456");
+        t1.setPassword("456789");
         t1.setStatus("N");
         userService.updateUser(t1);
         return "修改用户"+t1.getId()+"信息";
