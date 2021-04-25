@@ -12,4 +12,6 @@ public interface UserMapper {
     int updateUserByid(User user) ;
     User getUserByid(Integer id) ;
     List<User> getAllUsers() ;
+
+    User findUserByUsername(User user);
 }

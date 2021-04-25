@@ -26,4 +26,8 @@
         status = #{status,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="findUserByUsername" parameterType="com.mh.msw.model.User" resultType="com.mh.msw.model.User">
+        select * from user where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 </mapper>
