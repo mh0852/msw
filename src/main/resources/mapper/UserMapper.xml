@@ -28,6 +28,6 @@
     </update>
 
     <select id="findUserByUsername" parameterType="com.mh.msw.model.User" resultType="com.mh.msw.model.User">
-        select * from user where user_name = #{userName,jdbcType=VARCHAR}
+        select id,user_name as userName,name,password,status from user where user_name = #{userName,jdbcType=VARCHAR}
     </select>
 </mapper>

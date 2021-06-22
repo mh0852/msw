@@ -75,15 +75,15 @@ public class UserController {
         u1.setUserName(username);
         Log4j2Util.logger.info("u1："+u1.toString());
         User u2 = userService.findUserByUsername(u1);
-        u2.setUserName(username);
-        Log4j2Util.logger.info("u2："+u2.toString());
-        if(username==null){
-            return "无此账户";
+        if(u2==null||username.equals("用户名")){
+            return "无此账户或账户为空";
         }else if(password.equals(u2.getPassword()))
         {
+            Log4j2Util.logger.info("u2："+u2.toString());
             String str= JSON.toJSON(u2).toString();
             return "登录成功! 用户信息 ： " + str;
         }else {
+            Log4j2Util.logger.info("u2："+u2.toString());
             return "密码错误";
         }
 
