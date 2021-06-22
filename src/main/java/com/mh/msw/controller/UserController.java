@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -70,7 +72,7 @@ public class UserController {
 //    }
 
     @PostMapping("/login")
-    public String login(@RequestParam(value = "username") String username,@RequestParam(value = "password") String password){
+    public String login(@RequestParam(value = "username") String username,@RequestParam(value = "password") String password,HttpServletRequest request){
         User u1 = new User();
         u1.setUserName(username);
         Log4j2Util.logger.info("u1："+u1.toString());
@@ -81,11 +83,15 @@ public class UserController {
         {
             Log4j2Util.logger.info("u2："+u2.toString());
             String str= JSON.toJSON(u2).toString();
+            HttpSession session = request.getSession();
+            session.setAttribute("loginUserId", u2.getUserName());
             return "登录成功! 用户信息 ： " + str;
         }else {
             Log4j2Util.logger.info("u2："+u2.toString());
             return "密码错误";
         }
+
+
 
     }
 
