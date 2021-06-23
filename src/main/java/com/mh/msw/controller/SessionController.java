@@ -12,13 +12,16 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 public class SessionController {
-    @RequestMapping(value = "/get-session-id.action",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/getsession",method = RequestMethod.GET)
     public String getSessionId(){
         System.out.println("到session控制器");
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
+        System.out.println("redis没session，获取");
+        System.out.println(session.getId());
         String sessionId="";
-        Object temp=session.getAttribute("test");//session中存储userCode的key为USER
+        Object temp=session.getAttribute("username");//session中存储userCode的key为USER
         System.out.println(temp.toString());
         sessionId=session.getId();
         return sessionId;
@@ -27,7 +30,8 @@ public class SessionController {
     @RequestMapping("/setsession")
     @ResponseBody
     String home(HttpSession session) {
-        session.setAttribute("test", "hahah");
+        session.setAttribute("username", "hello admin");
+        System.out.println(session.getId());
         return "Hello World!";
     }
 

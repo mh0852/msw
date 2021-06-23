@@ -9,7 +9,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
 @Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds=60*5,redisNamespace = "spring:session:tjzz:application")//设置session过期时间,设置存储路径
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds=60*4,redisNamespace = "spring:session:msw")//设置session过期时间,设置存储路径
 @ConfigurationProperties(prefix = "spring.redis")
 public class SessionConfig {
 

@@ -6,6 +6,7 @@ import com.mh.msw.service.UserService;
 import com.mh.msw.untils.Log4j2Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
 
     @GetMapping("/getAllUser")
     public String getAllUser(){
@@ -84,7 +89,9 @@ public class UserController {
             Log4j2Util.logger.info("u2："+u2.toString());
             String str= JSON.toJSON(u2).toString();
             HttpSession session = request.getSession();
-            session.setAttribute("loginUserId", u2.getUserName());
+            session.setAttribute("username", u2.getUserName());
+            session.setAttribute("session_id",session.getId());
+           // redisTemplate.opsForValue().set("loginUser:" + u2.getUserName(), session.getId());
             return "登录成功! 用户信息 ： " + str;
         }else {
             Log4j2Util.logger.info("u2："+u2.toString());
