@@ -30,6 +30,7 @@ public class RedisSessionInterceptor implements HandlerInterceptor
                 //如果session_id的值和当前session值相同，则没过期
                 if (session.getAttribute("session_id").equals(session.getId()))
                 {
+                    System.out.println("session未过期，是同一用户");
                     return true;
                 }
             }

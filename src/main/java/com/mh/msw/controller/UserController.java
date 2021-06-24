@@ -7,16 +7,15 @@ import com.mh.msw.untils.Log4j2Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     private UserService userService;
@@ -83,7 +82,7 @@ public class UserController {
         Log4j2Util.logger.info("u1："+u1.toString());
         User u2 = userService.findUserByUsername(u1);
         if(u2==null||username.equals("用户名")){
-            return "无此账户或账户为空";
+            return "redirect:acct_null.html";
         }else if(password.equals(u2.getPassword()))
         {
             Log4j2Util.logger.info("u2："+u2.toString());
@@ -92,10 +91,10 @@ public class UserController {
             session.setAttribute("username", u2.getUserName());
             session.setAttribute("session_id",session.getId());
            // redisTemplate.opsForValue().set("loginUser:" + u2.getUserName(), session.getId());
-            return "登录成功! 用户信息 ： " + str;
+            return "redirect:console.html";
         }else {
             Log4j2Util.logger.info("u2："+u2.toString());
-            return "密码错误";
+            return "redirect:passwd_error.html";
         }
 
 
